@@ -1,6 +1,11 @@
+"""
+Plotting functions.
+"""
+
+
 import altair as alt
 
-import utils
+from . import utils
 
 
 altair_encoding_dict = {
@@ -23,36 +28,39 @@ def platemap(
     plate_size=[250, 180],
     text_size=7,
 ):
-    """
-    Plot a platemap.
+    """Plot a platemap.
 
-    Arguments:
+    Plot an interactive platemap of one of more plates.
+
+    Parameters
     ----------
-        df: pandas DataFrame
-            dataframe containing plate data
-        well: string
-            name of well column in `df`
-        val: string
-            name of value column in `df`
-        plate: string
-            name of plate column in `df`
-        tooltips: list of strings
-            name of columns to show info on well-hover
-        divering: bool
-            whether or not data is divering
-        cmap: string
-            colourmap
-        val_type: string
-            whether values are: "continuous", "ordered" or "categorical",
-            this will influence the colourmap and legend format
-        ncols: int
-            number of columns to display multiple plates
-        plate_size: list of 2 ints
-            [width, height] size of individual plates in pixels
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate:  string
+        name of plate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    divering : bool
+        whether or not data is divering
+    cmap : string
+        colourmap
+    val_type : string
+        whether values are: "continuous", "ordered" or "categorical",
+        this will influence the colourmap and legend format
+    ncols : int
+        number of columns to display multiple plates
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
 
-    Returns:
+    Returns
     ---------
-        an altair.Chart object
+    altair.Chart
     """
     val_type_altair = altair_encoding_dict[val_type]
     if tooltips is None:
