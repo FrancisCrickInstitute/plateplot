@@ -69,7 +69,7 @@ def platemap(
         name of well column in `df`
     val : string
         name of value column in `df`
-    plate:  string
+    plate :  string
         name of plate column in `df`
     tooltips : list of strings
         name of columns to show info on well-hover
@@ -139,7 +139,191 @@ def platemap(
         .resolve_axis(x=&#34;independent&#34;, y=&#34;independent&#34;)
         .properties(width=plate_size[0], height=plate_size[1])
     )
-    return chart</code></pre>
+    return chart
+
+
+def platemap_std(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the standard deviation platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated standard deviation
+    of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate:  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregregate data to median
+    # use `platemap()` function to create plot
+    raise NotImplementedError()
+
+
+def platemap_mad(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the median absolute deviation platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated median
+    absolute deviation (MAD) of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate:  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregregate data to median
+    # use `platemap()` function to create plot
+    raise NotImplementedError()
+
+
+def platemap_mean(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the mean platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated mean
+    of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate :  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregate to mean
+    # plot with `platemap()`
+    raise NotImplementedError()
+
+
+def platemap_median(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the median platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated median
+    of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate :  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregate to median
+    # plot with `platemap()`
+    raise NotImplementedError()</code></pre>
 </details>
 </section>
 <section>
@@ -215,7 +399,7 @@ this will influence the colourmap and legend format</dd>
         name of well column in `df`
     val : string
         name of value column in `df`
-    plate:  string
+    plate :  string
         name of plate column in `df`
     tooltips : list of strings
         name of columns to show info on well-hover
@@ -288,6 +472,338 @@ this will influence the colourmap and legend format</dd>
     return chart</code></pre>
 </details>
 </dd>
+<dt id="plateplot.plot.platemap_mad"><code class="name flex">
+<span>def <span class="ident">platemap_mad</span></span>(<span>df, well='Well', val='Result', plate='plate', rep='replicate', tooltips=None, cmap=None, plate_size=[250, 180], text_size=7)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the median absolute deviation platemap of multiple plates.</p>
+<p>Plot an interactive platemap showing the aggregated median
+absolute deviation (MAD) of replicate plates.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>dataframe containing plate data</dd>
+<dt><strong><code>well</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of well column in <code>df</code></dd>
+<dt><strong><code>val</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of value column in <code>df</code></dd>
+<dt><strong><code>plate</code></strong> :&ensp;<code> string</code></dt>
+<dd>name of plate column in <code>df</code></dd>
+<dt><strong><code>rep</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of replicate column in <code>df</code></dd>
+<dt><strong><code>tooltips</code></strong> :&ensp;<code>list</code> of <code>strings</code></dt>
+<dd>name of columns to show info on well-hover</dd>
+<dt><strong><code>cmap</code></strong> :&ensp;<code>string</code></dt>
+<dd>colourmap</dd>
+<dt><strong><code>plate_size</code></strong> :&ensp;<code>list[int, int[</code></dt>
+<dd>[width, height] size of individual plates in pixels</dd>
+<dt><strong><code>text_size</code></strong> :&ensp;<code>int</code></dt>
+<dd>size of text in row, column, plate labels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>altair.Chart</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def platemap_mad(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the median absolute deviation platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated median
+    absolute deviation (MAD) of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate:  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregregate data to median
+    # use `platemap()` function to create plot
+    raise NotImplementedError()</code></pre>
+</details>
+</dd>
+<dt id="plateplot.plot.platemap_mean"><code class="name flex">
+<span>def <span class="ident">platemap_mean</span></span>(<span>df, well='Well', val='Result', plate='plate', rep='replicate', tooltips=None, cmap=None, plate_size=[250, 180], text_size=7)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the mean platemap of multiple plates.</p>
+<p>Plot an interactive platemap showing the aggregated mean
+of replicate plates.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>dataframe containing plate data</dd>
+<dt><strong><code>well</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of well column in <code>df</code></dd>
+<dt><strong><code>val</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of value column in <code>df</code></dd>
+<dt><strong><code>plate</code></strong> :&ensp;<code> string</code></dt>
+<dd>name of plate column in <code>df</code></dd>
+<dt><strong><code>rep</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of replicate column in <code>df</code></dd>
+<dt><strong><code>tooltips</code></strong> :&ensp;<code>list</code> of <code>strings</code></dt>
+<dd>name of columns to show info on well-hover</dd>
+<dt><strong><code>cmap</code></strong> :&ensp;<code>string</code></dt>
+<dd>colourmap</dd>
+<dt><strong><code>plate_size</code></strong> :&ensp;<code>list[int, int[</code></dt>
+<dd>[width, height] size of individual plates in pixels</dd>
+<dt><strong><code>text_size</code></strong> :&ensp;<code>int</code></dt>
+<dd>size of text in row, column, plate labels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>altair.Chart</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def platemap_mean(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the mean platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated mean
+    of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate :  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregate to mean
+    # plot with `platemap()`
+    raise NotImplementedError()</code></pre>
+</details>
+</dd>
+<dt id="plateplot.plot.platemap_median"><code class="name flex">
+<span>def <span class="ident">platemap_median</span></span>(<span>df, well='Well', val='Result', plate='plate', rep='replicate', tooltips=None, cmap=None, plate_size=[250, 180], text_size=7)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the median platemap of multiple plates.</p>
+<p>Plot an interactive platemap showing the aggregated median
+of replicate plates.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>dataframe containing plate data</dd>
+<dt><strong><code>well</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of well column in <code>df</code></dd>
+<dt><strong><code>val</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of value column in <code>df</code></dd>
+<dt><strong><code>plate</code></strong> :&ensp;<code> string</code></dt>
+<dd>name of plate column in <code>df</code></dd>
+<dt><strong><code>rep</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of replicate column in <code>df</code></dd>
+<dt><strong><code>tooltips</code></strong> :&ensp;<code>list</code> of <code>strings</code></dt>
+<dd>name of columns to show info on well-hover</dd>
+<dt><strong><code>cmap</code></strong> :&ensp;<code>string</code></dt>
+<dd>colourmap</dd>
+<dt><strong><code>plate_size</code></strong> :&ensp;<code>list[int, int[</code></dt>
+<dd>[width, height] size of individual plates in pixels</dd>
+<dt><strong><code>text_size</code></strong> :&ensp;<code>int</code></dt>
+<dd>size of text in row, column, plate labels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>altair.Chart</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def platemap_median(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the median platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated median
+    of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate :  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregate to median
+    # plot with `platemap()`
+    raise NotImplementedError()</code></pre>
+</details>
+</dd>
+<dt id="plateplot.plot.platemap_std"><code class="name flex">
+<span>def <span class="ident">platemap_std</span></span>(<span>df, well='Well', val='Result', plate='plate', rep='replicate', tooltips=None, cmap=None, plate_size=[250, 180], text_size=7)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Plot the standard deviation platemap of multiple plates.</p>
+<p>Plot an interactive platemap showing the aggregated standard deviation
+of replicate plates.</p>
+<h2 id="parameters">Parameters</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>dataframe containing plate data</dd>
+<dt><strong><code>well</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of well column in <code>df</code></dd>
+<dt><strong><code>val</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of value column in <code>df</code></dd>
+<dt><strong><code>plate</code></strong> :&ensp;<code> string</code></dt>
+<dd>name of plate column in <code>df</code></dd>
+<dt><strong><code>rep</code></strong> :&ensp;<code>string</code></dt>
+<dd>name of replicate column in <code>df</code></dd>
+<dt><strong><code>tooltips</code></strong> :&ensp;<code>list</code> of <code>strings</code></dt>
+<dd>name of columns to show info on well-hover</dd>
+<dt><strong><code>cmap</code></strong> :&ensp;<code>string</code></dt>
+<dd>colourmap</dd>
+<dt><strong><code>plate_size</code></strong> :&ensp;<code>list[int, int[</code></dt>
+<dd>[width, height] size of individual plates in pixels</dd>
+<dt><strong><code>text_size</code></strong> :&ensp;<code>int</code></dt>
+<dd>size of text in row, column, plate labels</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>altair.Chart</code></dt>
+<dd>&nbsp;</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def platemap_std(
+    df,
+    well=&#34;Well&#34;,
+    val=&#34;Result&#34;,
+    plate=&#34;plate&#34;,
+    rep=&#34;replicate&#34;,
+    tooltips=None,
+    cmap=None,
+    plate_size=[250, 180],
+    text_size=7,
+):
+    &#34;&#34;&#34;Plot the standard deviation platemap of multiple plates.
+
+    Plot an interactive platemap showing the aggregated standard deviation
+    of replicate plates.
+
+    Parameters
+    ----------
+    df : pandas.DataFrame
+        dataframe containing plate data
+    well : string
+        name of well column in `df`
+    val : string
+        name of value column in `df`
+    plate:  string
+        name of plate column in `df`
+    rep : string
+        name of replicate column in `df`
+    tooltips : list of strings
+        name of columns to show info on well-hover
+    cmap : string
+        colourmap
+    plate_size: list[int, int[
+        [width, height] size of individual plates in pixels
+    text_size : int
+        size of text in row, column, plate labels
+
+    Returns
+    ---------
+    altair.Chart
+    &#34;&#34;&#34;
+    # aggregregate data to median
+    # use `platemap()` function to create plot
+    raise NotImplementedError()</code></pre>
+</details>
+</dd>
 </dl>
 </section>
 <section>
@@ -307,6 +823,10 @@ this will influence the colourmap and legend format</dd>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
 <li><code><a title="plateplot.plot.platemap" href="#plateplot.plot.platemap">platemap</a></code></li>
+<li><code><a title="plateplot.plot.platemap_mad" href="#plateplot.plot.platemap_mad">platemap_mad</a></code></li>
+<li><code><a title="plateplot.plot.platemap_mean" href="#plateplot.plot.platemap_mean">platemap_mean</a></code></li>
+<li><code><a title="plateplot.plot.platemap_median" href="#plateplot.plot.platemap_median">platemap_median</a></code></li>
+<li><code><a title="plateplot.plot.platemap_std" href="#plateplot.plot.platemap_std">platemap_std</a></code></li>
 </ul>
 </li>
 </ul>
