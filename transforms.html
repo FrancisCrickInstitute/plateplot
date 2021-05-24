@@ -129,7 +129,10 @@ def mad(df, well, val, plate):
     --------
     pandas.DataFrame
     &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;mad&#34;)
+    df_mad = group(df, well, val, plate).agg(func=&#34;mad&#34;)
+    # for some reason mad keeps the multi-index, so we have to drop that
+    return df_mad.reset_index(drop=True)
+
 
 
 def cv(df, well, val, plate):
@@ -289,7 +292,9 @@ values, or any other values which could be negative.</p>
     --------
     pandas.DataFrame
     &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;mad&#34;)</code></pre>
+    df_mad = group(df, well, val, plate).agg(func=&#34;mad&#34;)
+    # for some reason mad keeps the multi-index, so we have to drop that
+    return df_mad.reset_index(drop=True)</code></pre>
 </details>
 </dd>
 <dt id="plateplot.transforms.mean"><code class="name flex">
