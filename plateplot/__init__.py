@@ -6,6 +6,6 @@ Python functions to plot interative platemaps using [altair](https://altair-viz.
 Platemaps should be able to handle anything from 6-384 well plates (1536 potentially incoming).
 """
 
-from plateplot.plot import platemap
+from plateplot.plot import platemap, platemap_agg
 from plateplot import transforms
 from plateplot import utils
