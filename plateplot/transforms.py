@@ -100,7 +100,10 @@ def mad(df, well, val, plate):
     --------
     pandas.DataFrame
     """
-    return group(df, well, val, plate).agg(func="mad")
+    df_mad = group(df, well, val, plate).agg(func="mad")
+    # for some reason mad keeps the multi-index, so we have to drop that
+    return df_mad.reset_index(drop=True)
+
 
 
 def cv(df, well, val, plate):
