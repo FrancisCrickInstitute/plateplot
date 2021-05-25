@@ -115,10 +115,11 @@ def platemap(
 
 
 def platemap_agg(
-    df, well="Well", val="Result", plate="plate", agg_func=transforms.mean, **kwargs
+    df, well="Well", val="Result", plate="plate", agg_func="mean", **kwargs
 ):
     """
-    Plot an interactive platemap of plates which h
+    Plot an interactive platemap of multiple plates after performing
+    and aggregation on the replicates.
 
     Parameters
     -----------
@@ -130,9 +131,14 @@ def platemap_agg(
         name of value column in `df`
     plate :  string
         name of plate column in `df`
-    agg_func : platemap.transform
-        an aggregation function which acts on df[[well, val, plate]]
-        and returns a pandas.dataframe. See `plateplot.transforms`.
+    agg_func : str, function, list or dict
+        Function to use for aggregating the data. If a function, must either
+        work when passed a pandas.DataFrame, or when passed to DataFrame.apply.
+        Accepted combinations are:
+        - function
+        - string of function name
+        This does not handle multiple aggregation functions like
+        pandas.DataFrame.agg as we only plot a single feature on the platemap.
     **kwargs : key-word arguments
         additional arguments passed to `platemap`
 
@@ -140,6 +146,16 @@ def platemap_agg(
     -------
     altair.Chart
     """
-    df_agg = agg_func(df, well, val, plate)
+    # handle edge cases for agg_func
+    if isinstance(agg_func, str):
+        if agg_func.lower() == "cv":
+            agg_func = transforms.cv
+    df_grouped = transforms.group(df, well, val, plate)
+    df_agg = df_grouped.agg(func=agg_func)
+    # deal with bug where MAD aggregation still retains multi-index
+    # which we need to remove for altair
+    if isinstance(agg_func, str):
+        if agg_func.lower() == "mad":
+            df_agg = df_agg.reset_index(drop=True)
     chart = platemap(df_agg, well, val, plate, **kwargs)
     return chart
