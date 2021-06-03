@@ -52,97 +52,11 @@ def group(df, well, val, plate):
     return df_grouped
 
 
-def mean(df, well, val, plate):
+def cv(x):
     &#34;&#34;&#34;
     Parameters
     -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns:
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;mean&#34;)
-
-
-def median(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;median&#34;)
-
-
-def std(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;std&#34;)
-
-
-def var(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;var&#34;)
-
-
-def mad(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    df_mad = group(df, well, val, plate).agg(func=&#34;mad&#34;)
-    # for some reason mad keeps the multi-index, so we have to drop that
-    return df_mad.reset_index(drop=True)
-
-
-
-def cv(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
+    x : array-like
 
     Notes
     ------
@@ -151,10 +65,10 @@ def cv(df, well, val, plate):
 
     Returns
     --------
-    pandas.DataFrame
+    array-like
+        same dimensions as input
     &#34;&#34;&#34;
-    cv = lambda x: np.std(x, ddof=1) / np.mean(x) * 100
-    return group(df, well, val, plate).agg(func=cv)</code></pre>
+    return np.std(x, ddof=1) / np.mean(x) * 100</code></pre>
 </details>
 </section>
 <section>
@@ -165,18 +79,12 @@ def cv(df, well, val, plate):
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
 <dt id="plateplot.transforms.cv"><code class="name flex">
-<span>def <span class="ident">cv</span></span>(<span>df, well, val, plate)</span>
+<span>def <span class="ident">cv</span></span>(<span>x)</span>
 </code></dt>
 <dd>
 <div class="desc"><h2 id="parameters">Parameters</h2>
 <dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>well</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>val</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>plate</code></strong> :&ensp;<code>str</code></dt>
+<dt><strong><code>x</code></strong> :&ensp;<code>array-like</code></dt>
 <dd>&nbsp;</dd>
 </dl>
 <h2 id="notes">Notes</h2>
@@ -184,21 +92,18 @@ def cv(df, well, val, plate):
 values, or any other values which could be negative.</p>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
+<dt><code>array-like</code></dt>
+<dd>same dimensions as input</dd>
 </dl></div>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def cv(df, well, val, plate):
+<pre><code class="python">def cv(x):
     &#34;&#34;&#34;
     Parameters
     -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
+    x : array-like
 
     Notes
     ------
@@ -207,10 +112,10 @@ values, or any other values which could be negative.</p>
 
     Returns
     --------
-    pandas.DataFrame
+    array-like
+        same dimensions as input
     &#34;&#34;&#34;
-    cv = lambda x: np.std(x, ddof=1) / np.mean(x) * 100
-    return group(df, well, val, plate).agg(func=cv)</code></pre>
+    return np.std(x, ddof=1) / np.mean(x) * 100</code></pre>
 </details>
 </dd>
 <dt id="plateplot.transforms.group"><code class="name flex">
@@ -255,205 +160,6 @@ values, or any other values which could be negative.</p>
     return df_grouped</code></pre>
 </details>
 </dd>
-<dt id="plateplot.transforms.mad"><code class="name flex">
-<span>def <span class="ident">mad</span></span>(<span>df, well, val, plate)</span>
-</code></dt>
-<dd>
-<div class="desc"><h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>well</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>val</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>plate</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def mad(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    df_mad = group(df, well, val, plate).agg(func=&#34;mad&#34;)
-    # for some reason mad keeps the multi-index, so we have to drop that
-    return df_mad.reset_index(drop=True)</code></pre>
-</details>
-</dd>
-<dt id="plateplot.transforms.mean"><code class="name flex">
-<span>def <span class="ident">mean</span></span>(<span>df, well, val, plate)</span>
-</code></dt>
-<dd>
-<div class="desc"><h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>well</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>val</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>plate</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns:</h2>
-<p>pandas.DataFrame</p></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def mean(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns:
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;mean&#34;)</code></pre>
-</details>
-</dd>
-<dt id="plateplot.transforms.median"><code class="name flex">
-<span>def <span class="ident">median</span></span>(<span>df, well, val, plate)</span>
-</code></dt>
-<dd>
-<div class="desc"><h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>well</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>val</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>plate</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def median(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;median&#34;)</code></pre>
-</details>
-</dd>
-<dt id="plateplot.transforms.std"><code class="name flex">
-<span>def <span class="ident">std</span></span>(<span>df, well, val, plate)</span>
-</code></dt>
-<dd>
-<div class="desc"><h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>well</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>val</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>plate</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def std(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;std&#34;)</code></pre>
-</details>
-</dd>
-<dt id="plateplot.transforms.var"><code class="name flex">
-<span>def <span class="ident">var</span></span>(<span>df, well, val, plate)</span>
-</code></dt>
-<dd>
-<div class="desc"><h2 id="parameters">Parameters</h2>
-<dl>
-<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>well</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>val</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-<dt><strong><code>plate</code></strong> :&ensp;<code>str</code></dt>
-<dd>&nbsp;</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>pandas.DataFrame</code></dt>
-<dd>&nbsp;</dd>
-</dl></div>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def var(df, well, val, plate):
-    &#34;&#34;&#34;
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    &#34;&#34;&#34;
-    return group(df, well, val, plate).agg(func=&#34;var&#34;)</code></pre>
-</details>
-</dd>
 </dl>
 </section>
 <section>
@@ -471,14 +177,9 @@ values, or any other values which could be negative.</p>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
-<ul class="two-column">
+<ul class="">
 <li><code><a title="plateplot.transforms.cv" href="#plateplot.transforms.cv">cv</a></code></li>
 <li><code><a title="plateplot.transforms.group" href="#plateplot.transforms.group">group</a></code></li>
-<li><code><a title="plateplot.transforms.mad" href="#plateplot.transforms.mad">mad</a></code></li>
-<li><code><a title="plateplot.transforms.mean" href="#plateplot.transforms.mean">mean</a></code></li>
-<li><code><a title="plateplot.transforms.median" href="#plateplot.transforms.median">median</a></code></li>
-<li><code><a title="plateplot.transforms.std" href="#plateplot.transforms.std">std</a></code></li>
-<li><code><a title="plateplot.transforms.var" href="#plateplot.transforms.var">var</a></code></li>
 </ul>
 </li>
 </ul>

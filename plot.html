@@ -144,10 +144,11 @@ def platemap(
 
 
 def platemap_agg(
-    df, well=&#34;Well&#34;, val=&#34;Result&#34;, plate=&#34;plate&#34;, agg_func=transforms.mean, **kwargs
+    df, well=&#34;Well&#34;, val=&#34;Result&#34;, plate=&#34;plate&#34;, agg_func=&#34;mean&#34;, **kwargs
 ):
     &#34;&#34;&#34;
-    Plot an interactive platemap of plates which h
+    Plot an interactive platemap of multiple plates after performing
+    and aggregation on the replicates.
 
     Parameters
     -----------
@@ -159,9 +160,14 @@ def platemap_agg(
         name of value column in `df`
     plate :  string
         name of plate column in `df`
-    agg_func : platemap.transform
-        an aggregation function which acts on df[[well, val, plate]]
-        and returns a pandas.dataframe. See `plateplot.transforms`.
+    agg_func : str, function, list or dict
+        Function to use for aggregating the data. If a function, must either
+        work when passed a pandas.DataFrame, or when passed to DataFrame.apply.
+        Accepted combinations are:
+        - function
+        - string of function name
+        This does not handle multiple aggregation functions like
+        pandas.DataFrame.agg as we only plot a single feature on the platemap.
     **kwargs : key-word arguments
         additional arguments passed to `platemap`
 
@@ -169,7 +175,17 @@ def platemap_agg(
     -------
     altair.Chart
     &#34;&#34;&#34;
-    df_agg = agg_func(df, well, val, plate)
+    # handle edge cases for agg_func
+    if isinstance(agg_func, str):
+        if agg_func.lower() == &#34;cv&#34;:
+            agg_func = transforms.cv
+    df_grouped = transforms.group(df, well, val, plate)
+    df_agg = df_grouped.agg(func=agg_func)
+    # deal with bug where MAD aggregation still retains multi-index
+    # which we need to remove for altair
+    if isinstance(agg_func, str):
+        if agg_func.lower() == &#34;mad&#34;:
+            df_agg = df_agg.reset_index(drop=True)
     chart = platemap(df_agg, well, val, plate, **kwargs)
     return chart</code></pre>
 </details>
@@ -321,10 +337,11 @@ this will influence the colourmap and legend format</dd>
 </details>
 </dd>
 <dt id="plateplot.plot.platemap_agg"><code class="name flex">
-<span>def <span class="ident">platemap_agg</span></span>(<span>df, well='Well', val='Result', plate='plate', agg_func=&lt;function mean&gt;, **kwargs)</span>
+<span>def <span class="ident">platemap_agg</span></span>(<span>df, well='Well', val='Result', plate='plate', agg_func='mean', **kwargs)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Plot an interactive platemap of plates which h</p>
+<div class="desc"><p>Plot an interactive platemap of multiple plates after performing
+and aggregation on the replicates.</p>
 <h2 id="parameters">Parameters</h2>
 <dl>
 <dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
@@ -335,9 +352,14 @@ this will influence the colourmap and legend format</dd>
 <dd>name of value column in <code>df</code></dd>
 <dt><strong><code>plate</code></strong> :&ensp;<code> string</code></dt>
 <dd>name of plate column in <code>df</code></dd>
-<dt><strong><code>agg_func</code></strong> :&ensp;<code>platemap.transform</code></dt>
-<dd>an aggregation function which acts on df[[well, val, plate]]
-and returns a pandas.dataframe. See <code><a title="plateplot.transforms" href="transforms.html">plateplot.transforms</a></code>.</dd>
+<dt><strong><code>agg_func</code></strong> :&ensp;<code>str, function, list</code> or <code>dict</code></dt>
+<dd>Function to use for aggregating the data. If a function, must either
+work when passed a pandas.DataFrame, or when passed to DataFrame.apply.
+Accepted combinations are:
+- function
+- string of function name
+This does not handle multiple aggregation functions like
+pandas.DataFrame.agg as we only plot a single feature on the platemap.</dd>
 <dt><strong><code>**kwargs</code></strong> :&ensp;<code>key-word arguments</code></dt>
 <dd>additional arguments passed to <code><a title="plateplot.plot.platemap" href="#plateplot.plot.platemap">platemap()</a></code></dd>
 </dl>
@@ -351,10 +373,11 @@ and returns a pandas.dataframe. See <code><a title="plateplot.transforms" href="
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def platemap_agg(
-    df, well=&#34;Well&#34;, val=&#34;Result&#34;, plate=&#34;plate&#34;, agg_func=transforms.mean, **kwargs
+    df, well=&#34;Well&#34;, val=&#34;Result&#34;, plate=&#34;plate&#34;, agg_func=&#34;mean&#34;, **kwargs
 ):
     &#34;&#34;&#34;
-    Plot an interactive platemap of plates which h
+    Plot an interactive platemap of multiple plates after performing
+    and aggregation on the replicates.
 
     Parameters
     -----------
@@ -366,9 +389,14 @@ and returns a pandas.dataframe. See <code><a title="plateplot.transforms" href="
         name of value column in `df`
     plate :  string
         name of plate column in `df`
-    agg_func : platemap.transform
-        an aggregation function which acts on df[[well, val, plate]]
-        and returns a pandas.dataframe. See `plateplot.transforms`.
+    agg_func : str, function, list or dict
+        Function to use for aggregating the data. If a function, must either
+        work when passed a pandas.DataFrame, or when passed to DataFrame.apply.
+        Accepted combinations are:
+        - function
+        - string of function name
+        This does not handle multiple aggregation functions like
+        pandas.DataFrame.agg as we only plot a single feature on the platemap.
     **kwargs : key-word arguments
         additional arguments passed to `platemap`
 
@@ -376,7 +404,17 @@ and returns a pandas.dataframe. See <code><a title="plateplot.transforms" href="
     -------
     altair.Chart
     &#34;&#34;&#34;
-    df_agg = agg_func(df, well, val, plate)
+    # handle edge cases for agg_func
+    if isinstance(agg_func, str):
+        if agg_func.lower() == &#34;cv&#34;:
+            agg_func = transforms.cv
+    df_grouped = transforms.group(df, well, val, plate)
+    df_agg = df_grouped.agg(func=agg_func)
+    # deal with bug where MAD aggregation still retains multi-index
+    # which we need to remove for altair
+    if isinstance(agg_func, str):
+        if agg_func.lower() == &#34;mad&#34;:
+            df_agg = df_agg.reset_index(drop=True)
     chart = platemap(df_agg, well, val, plate, **kwargs)
     return chart</code></pre>
 </details>
