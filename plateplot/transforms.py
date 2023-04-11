@@ -23,97 +23,11 @@ def group(df, well, val, plate):
     return df_grouped
 
 
-def mean(df, well, val, plate):
+def cv(x):
     """
     Parameters
     -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns:
-    --------
-    pandas.DataFrame
-    """
-    return group(df, well, val, plate).agg(func="mean")
-
-
-def median(df, well, val, plate):
-    """
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    """
-    return group(df, well, val, plate).agg(func="median")
-
-
-def std(df, well, val, plate):
-    """
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    """
-    return group(df, well, val, plate).agg(func="std")
-
-
-def var(df, well, val, plate):
-    """
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    """
-    return group(df, well, val, plate).agg(func="var")
-
-
-def mad(df, well, val, plate):
-    """
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
-
-    Returns
-    --------
-    pandas.DataFrame
-    """
-    df_mad = group(df, well, val, plate).agg(func="mad")
-    # for some reason mad keeps the multi-index, so we have to drop that
-    return df_mad.reset_index(drop=True)
-
-
-
-def cv(df, well, val, plate):
-    """
-    Parameters
-    -----------
-    df : pandas.DataFrame
-    well : str
-    val : str
-    plate : str
+    x : array-like
 
     Notes
     ------
@@ -122,7 +36,7 @@ def cv(df, well, val, plate):
 
     Returns
     --------
-    pandas.DataFrame
+    array-like
+        same dimensions as input
     """
-    cv = lambda x: np.std(x, ddof=1) / np.mean(x) * 100
-    return group(df, well, val, plate).agg(func=cv)
+    return np.std(x, ddof=1) / np.mean(x) * 100
