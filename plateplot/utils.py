@@ -1,7 +1,8 @@
 """General utility functions"""
+from typing import Tuple
 
 
-def split_row_col(well):
+def split_row_col(well: str) -> Tuple[str, int]:
     """Split a well label into row and column labels.
 
     e.g "A01" becomes ["A", 1]
@@ -18,6 +19,6 @@ def split_row_col(well):
     int
         column
     """
-    row = well[0]
-    col = int(well[1:])
+    row = well[:-2]
+    col = int(well[-2:])
     return row, col

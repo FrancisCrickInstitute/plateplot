@@ -5,9 +5,7 @@ Plotting functions.
 
 import altair as alt
 
-from . import utils
-from . import transforms
-
+from . import transforms, utils
 
 altair_encoding_dict = {
     "continuous": "quantitative",
@@ -89,7 +87,7 @@ def platemap(
         .mark_rect()
         .encode(
             x=alt.X("col:N", title=None),
-            y=alt.Y("row:N", title=None),
+            y=alt.Y("row:N", title=None, sort=None),
             color=color,
             tooltip=tooltips,
             facet=alt.Facet(
