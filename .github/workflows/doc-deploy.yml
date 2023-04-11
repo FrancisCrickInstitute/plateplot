@@ -27,7 +27,7 @@ jobs:
             mv docs/plateplot/* docs
             rm -rf docs/plateplot
       - name: Publish the pages
-        uses: JamesIves/github-pages-deploy-action@4.1.0
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: docs
