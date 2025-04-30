@@ -2,7 +2,6 @@
 Plotting functions.
 """
 
-
 import altair as alt
 
 from . import transforms, utils
@@ -98,7 +97,7 @@ def platemap(
             ),
         )
         .configure_axis(labelFontSize=text_size)
-        .configure_axisX(orient="top", labelAngle=0, labelPadding=10)
+        .configure_axisX(orient="top", labelAngle=0, labelPadding=3)
         .configure_scale(bandPaddingInner=0.06)
         .configure_legend(
             labelFontSize=text_size,
