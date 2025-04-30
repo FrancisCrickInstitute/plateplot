@@ -107,7 +107,7 @@ values, or any other values which could be negative.</p>
     pandas.DataFrameGroupBy
     &#34;&#34;&#34;
     df_sub = df[[well, val, plate]]
-    df_grouped = df_sub.groupby([plate, well], as_index=False)
+    df_grouped = df_sub.groupby([plate, well], as_index=False, sort=False)
     return df_grouped</code></pre>
 </details>
 <div class="desc"><h2 id="parameters">Parameters</h2>
