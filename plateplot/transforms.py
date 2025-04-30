@@ -19,7 +19,7 @@ def group(df, well, val, plate):
     pandas.DataFrameGroupBy
     """
     df_sub = df[[well, val, plate]]
-    df_grouped = df_sub.groupby([plate, well], as_index=False)
+    df_grouped = df_sub.groupby([plate, well], as_index=False, sort=False)
     return df_grouped
 
 
